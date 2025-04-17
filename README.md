@@ -116,6 +116,7 @@ sudo ufw allow 5229
    
 ```
    sudo netstat -tuln | grep 5229
+   sudo ss -tuln | grep 5229
 
    sudo lsof -i :5229
 ```
