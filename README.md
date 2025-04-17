@@ -120,6 +120,11 @@ sudo ufw allow 5229
 
    sudo lsof -i :5229
 ```
+5. Тестирование без службы:
+   Чтобы упростить отладку, вы можете временно запустить socat вручную в терминале, чтобы проверить его работу без использования службы:
+   
+```
 
-
+   socat -v TCP-LISTEN:5229,fork SYSTEM:"(echo -ne 'HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\n'; cat /home/art/DISKUSE/DFH)"
+```
 
