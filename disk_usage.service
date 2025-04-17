@@ -1,0 +1,9 @@
+[Unit]
+Description=Disk Usage Monitor
+
+[Service]
+ExecStart=/home/art/DISKUSE/disk_usage.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

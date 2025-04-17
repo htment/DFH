@@ -1,0 +1,9 @@
+Файловая система Размер Использовано  Дост Использовано% Cмонтировано в
+udev               915M            0  915M            0% /dev
+tmpfs              189M         2,6M  186M            2% /run
+/dev/sda1           28G          12G   15G           45% /
+tmpfs              942M            0  942M            0% /dev/shm
+tmpfs              5,0M         8,0K  5,0M            1% /run/lock
+/dev/sdb1          458G          12G  423G            3% /mnt
+/dev/sda6          888G         192G  651G           23% /home
+tmpfs              189M          64K  189M            1% /run/user/1000
