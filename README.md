@@ -13,16 +13,20 @@ sudo nano /usr/local/bin/disk_usage_server.sh
 ```
 #!/bin/bash
 
-# Путь к файлу, в который будет сохраняться результат df -h
+# Путь к файлу, в который будет сохраняться результат
 OUTPUT_FILE="/home/art/DISKUSE/DFH"
 
-# Запускаем бесконечный цикл для обновления файла
+# Используем socat для раздачи файла через TCP с обработкой HTTP
+socat -v TCP-LISTEN:5229,fork SYSTEM:"(echo -ne 'HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\n'; cat $OUTPUT_FILE)"
+
+# Бесконечный цикл
 while true; do
+    # Выполняем команду df -h и сохраняем результат в файл
     df -h > "$OUTPUT_FILE"
+    # Ждем 60 секунд
     sleep 60
-done &
-# Используем socat для раздачи файла через TCP
-socat TCP-LISTEN:5229,fork FILE:"$OUTPUT_FILE"
+done
+
 
 ```
 Сохраните файл и закройте редактор. Затем сделайте скрипт исполняемым:
@@ -78,6 +82,11 @@ sudo systemctl start disk_usage.service
 sudo systemctl status disk_usage.service
 ``
 
+
+``
+sudo systemctl daemon-reload
+sudo systemctl restart disk_usage.service
+``
 ▎Шаг 5: Доступ к файлу через socat
 
 Теперь вы можете получить доступ к вашему файлу через socat, используя следующий адрес:
